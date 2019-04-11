@@ -1,19 +1,12 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-<html>
-    <head>
-        <title>Django Girls blog</title>
-    </head>
-    <body>
-        <div>
-            <h1><a href="/">Django Girls Blog</a></h1>
-        </div>
-        {% for s in sub %}
-            <div>
-                <p> published : {{s.published_date}}</p>
-                <h2><a href="">{{ s.title }}</a></h2>
-                <p>{{s.text|linebreaksbr}}</p>
+{% extends 'firstapp/base.html' %}
+{% block content%}
+    {% for post in sub %}
+        <div class="post">
+            <div class="date">
+                {{ post.published_date }}
             </div>
-        {% endfor %}
-    </body>
-</html>
+            <h1><a href="{% url 'subjects_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </div>
+    {% endfor %}
+{% endblock %}
